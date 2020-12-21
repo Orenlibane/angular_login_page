@@ -1,0 +1,46 @@
+<section class="login-container">
+  <div class="state-buttons">
+    <button (click)="state ='Signup'">Signup</button>
+    <button (click)="state ='Login'">Login</button>
+  </div>
+  <form *ngIf="state === 'Login'" class="login-form" [formGroup]="loginForm" (ngSubmit)="submit()">
+    <h1>Login Page</h1>
+    <mat-form-field>
+      <mat-label class="login-user-input login-input"> Username:
+      </mat-label>
+      <input matInput placeholder="UserName" type="text" formControlName="userName">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label class="login-user-input login-input"> Password:
+      </mat-label>
+      <input matInput placeholder="Password" type="text" formControlName="password">
+    </mat-form-field>
+
+    <button [disabled]="!loginForm.valid" class="submit-btn" type="submit">{{state}}</button>
+  </form>
+  <form *ngIf="state === 'Signup'" class="signup-form" [formGroup]="signupForm" (ngSubmit)="submit()">
+    <h1>SignUp Page</h1>
+    <mat-form-field>
+      <mat-label class="login-user-input login-input"> Email:
+      </mat-label>
+      <input matInput placeholder="Email" type="email" formControlName="email">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label class="login-user-input login-input"> Username:
+      </mat-label>
+      <input matInput placeholder="UserName" type="text" formControlName="userName">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label class="login-user-input login-input"> Password:
+      </mat-label>
+      <input matInput placeholder="Password" type="text" formControlName="password">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label class="login-user-input login-input"> Password2:
+      </mat-label>
+      <input matInput placeholder="Password2" type="text" formControlName="password2">
+    </mat-form-field>
+
+    <button [disabled]="!signupForm.valid" class="submit-btn" type="submit">{{state}}</button>
+  </form>
+</section>
