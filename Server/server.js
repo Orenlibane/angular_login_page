@@ -2,6 +2,9 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const mongoose = require('mongoose');
+const flash = require('connect-flash');
+const session = require('express-session');
+const passport = require('passport');
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json())
@@ -11,6 +14,21 @@ app.use(cors());
 //     origin: 'http://localhost:4200',
 //     optionsSuccessStatus: 200
 // }
+
+// Express Session
+app.use(session({
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true
+}))
+
+// Passport middleware + config
+require('./config/passport')(passport);
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Connect Flash
+app.use(flash());
 
 // DB Config
 const db = require('./config/keys').MongoURI;

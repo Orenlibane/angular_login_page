@@ -17,7 +17,7 @@ export class LoginPageComponent implements OnInit {
   }
 
   loginForm = this.fb.group({
-    userName: (['', Validators.required]),
+    email: (['', Validators.required]),
     password: (['', Validators.required]),
   });
 
@@ -34,8 +34,14 @@ export class LoginPageComponent implements OnInit {
 
   submit(): any {
     if (this.state === 'Login') {
-      // login()
-    } else if (this.state === 'Signup') {
+      this.authService.login(this.loginForm.value).subscribe((res) => {
+        console.log('res from post', res);
+        // this.router.navigate(['/afterLogin']);
+        // console.log('Signed and logged');
+        console.log(res);
+      }, (err) => {
+        console.log('ERROR!', err);
+      });    } else if (this.state === 'Signup') {
       this.authService.signup(this.signupForm.value).subscribe((res) => {
         console.log('res from post', res);
         this.router.navigate(['/afterLogin']);
